@@ -1,0 +1,48 @@
+.modal-title {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    background-color:white;
+    border-radius: 15px;
+    margin: 15px;
+}
+
+/* Style the form container */
+.product-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+  }
+
+/* Style the form inputs */
+.product-form__input {
+    width: 100%;
+    margin: 10px;
+    padding: 12px;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Style the form select */
+.product-form__select {
+    width: 100%;
+    margin: 10px;
+}
+
+/* Style the form submit button */
+.product-form__submit {
+    width: 100%;
+    margin: 20px 0;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
