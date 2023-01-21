@@ -38,3 +38,15 @@ export const postProduct = (payload) => {
       throw error;
     });
 };
+
+export const getProducts = (id) => {
+  let endpoint = `${API_URL}/products`;
+  if (id) endpoint += `/product_id=${id}`;
+
+  return axios
+    .get(endpoint)
+    .then((response) => response.data)
+    .catch((error) => {
+      throw error;
+    });
+};

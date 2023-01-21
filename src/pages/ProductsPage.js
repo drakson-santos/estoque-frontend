@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 // @mui
 import { Container, Stack, Typography } from '@mui/material';
@@ -5,11 +6,25 @@ import { Container, Stack, Typography } from '@mui/material';
 import { ProductSort, ProductList } from '../sections/@dashboard/products';
 // mock
 import ShowFormButton from '../components/form/button';
+import { getProducts } from '../controllers/product';
 
 // ----------------------------------------------------------------------
 
 export default function ProductsPage() {
+  const [products, setProducts] = useState([]);
 
+  const loadProducts = async () => {
+    try {
+      const res = await getProducts();
+      setProducts(res.products || []);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    loadProducts();
+  }, []);
 
   return (
     <>
@@ -31,7 +46,7 @@ export default function ProductsPage() {
           </Stack>
         </Stack>
 
-        <ProductList products={[]} />
+        <ProductList products={products} />
       </Container>
     </>
   );
