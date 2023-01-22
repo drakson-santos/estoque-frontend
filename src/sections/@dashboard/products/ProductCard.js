@@ -5,6 +5,7 @@ import { styled } from '@mui/material/styles';
 // utils
 // components
 import Label from '../../../components/label';
+import { updateQtyProduct } from '../../../controllers/product';
 
 // ----------------------------------------------------------------------
 
@@ -22,14 +23,20 @@ ShopProductCard.propTypes = {
     product: PropTypes.object,
 };
 
-export default function ShopProductCard({ product }) {
-    const { product_name, photo, category, model } = product;
+export default function ShopProductCard({ product, reloadPage }) {
+    const { id, product_name, photo, category, model, quantity } = product;
+
+    const updateQty = (id, qty) => {
+        updateQtyProduct(id, qty)
+        reloadPage(true)
+    }
 
     return (
         <Card>
             <Box sx={{ pt: '100%', position: 'relative' }}>
                 <Label
                     variant="filled"
+                    className="cursor"
                     color="error"
                     sx={{
                         zIndex: 9,
@@ -37,7 +44,9 @@ export default function ShopProductCard({ product }) {
                         right: 16,
                         position: 'absolute',
                         textTransform: 'uppercase',
+                        cursor: 'pointer',
                     }}
+                    onClick={() => updateQty(id, quantity - 1)}
                 >
                     -
                 </Label>
@@ -50,7 +59,9 @@ export default function ShopProductCard({ product }) {
                         textTransform: 'uppercase',
                         top: 16,
                         right: 60,
+                        cursor: 'pointer',
                     }}
+                    onClick={() => updateQty(id, quantity + 1)}
                 >
                     +
                 </Label>
@@ -67,7 +78,7 @@ export default function ShopProductCard({ product }) {
                     </Typography>
                 </Link>
                 <Stack direction="row" alignItems="center" justifyContent="space-between">
-                    <Typography variant="subtitle1">QTD: {25}</Typography>
+                    <Typography variant="subtitle1">QTD: {quantity}</Typography>
                 </Stack>
                 <Stack direction="row" alignItems="center" justifyContent="space-between">
                     <Typography variant="subtitle1">

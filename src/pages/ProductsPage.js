@@ -11,43 +11,57 @@ import { getProducts } from '../controllers/product';
 // ----------------------------------------------------------------------
 
 export default function ProductsPage() {
-  const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState([]);
+    const [reloadPage, setReloadPage] = useState(false);
 
-  const loadProducts = async () => {
-    try {
-      const res = await getProducts();
-      setProducts(res.products || []);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    const loadProducts = async () => {
+        try {
+            const res = await getProducts();
+            setProducts(res.products || []);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
-  useEffect(() => {
-    loadProducts();
-  }, []);
+    useEffect(() => {
+        loadProducts();
+    }, []);
 
-  return (
-    <>
-      <Helmet>
-        <title> Dashboard: Produtos </title>
-      </Helmet>
+	useEffect(() => {
+		if (reloadPage) {
+			loadProducts()
+			setReloadPage(false)
+		}
+    }, [reloadPage]);
 
-      <Container>
-        <Typography variant="h4" sx={{ mb: 5 }}>
-          Produtos
-        </Typography>
+    return (
+        <>
+            <Helmet>
+                <title> Dashboard: Produtos </title>
+            </Helmet>
 
-        <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}>
-          <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-            <ProductSort />
-          </Stack>
-          <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-            <ShowFormButton />
-          </Stack>
-        </Stack>
+            <Container>
+                <Typography variant="h4" sx={{ mb: 5 }}>
+                    Produtos
+                </Typography>
 
-        <ProductList products={products} />
-      </Container>
-    </>
-  );
+                <Stack
+                    direction="row"
+                    flexWrap="wrap-reverse"
+                    alignItems="center"
+                    justifyContent="flex-end"
+                    sx={{ mb: 5 }}
+                >
+                    <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+                        <ProductSort />
+                    </Stack>
+                    <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+                        <ShowFormButton />
+                    </Stack>
+                </Stack>
+
+                <ProductList products={products} reloadPage={(reload) => setReloadPage(reload)}/>
+            </Container>
+        </>
+    );
 }
