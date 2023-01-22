@@ -63,7 +63,7 @@ export default function ShopProductCard({ product }) {
                         {product_name}
                     </Typography>
                     <Typography component="span" variant="subtitle2" sx={{ color: 'text.secondary' }}>
-                        {category} / {model}
+                        {category.category_name} / {model.model_name}
                     </Typography>
                 </Link>
                 <Stack direction="row" alignItems="center" justifyContent="space-between">
