@@ -8,6 +8,7 @@ import { styled } from '@mui/material/styles';
 import Label from '../../../components/label';
 import { updateQtyProduct } from '../../../controllers/product';
 import ModalCustom from '../../../components/modal/Modal';
+import ProductForm from '../../../components/form/Form';
 
 // ----------------------------------------------------------------------
 
@@ -99,7 +100,9 @@ export default function ShopProductCard({ product, reloadPage }) {
                 </Stack>
             </Stack>
 
-            <ModalCustom showModal={showModal} handlerModal={(isOpen) => handlerModal(isOpen)}/>
+            <ModalCustom showModal={showModal} handlerModal={(isOpen) => handlerModal(isOpen)}>
+                <ProductForm productData={product} />
+            </ModalCustom>
         </Card>
     );
 }

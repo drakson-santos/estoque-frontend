@@ -3,7 +3,7 @@ import { Modal } from '@mui/material';
 import Label from '../label/Label';
 import './styles.css';
 
-export default function ModalCustom({ componentOpen, showModal, handlerModal }) {
+export default function ModalCustom({ children, showModal, handlerModal }) {
     return (
         <Modal
             open={showModal}
@@ -25,6 +25,7 @@ export default function ModalCustom({ componentOpen, showModal, handlerModal }) 
                 >
                     X
                 </Label>
+                {children}
             </div>
         </Modal>
     );
