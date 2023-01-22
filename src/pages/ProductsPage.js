@@ -29,6 +29,7 @@ export default function ProductsPage() {
 
 	useEffect(() => {
 		if (reloadPage) {
+			console.log('Reloading')
 			loadProducts()
 			setReloadPage(false)
 		}
@@ -56,11 +57,11 @@ export default function ProductsPage() {
                         <ProductSort />
                     </Stack>
                     <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-                        <ShowFormButton />
+                        <ShowFormButton reloadPage={(reload) => setReloadPage(reload)}/>
                     </Stack>
                 </Stack>
 
-                <ProductList products={products} reloadPage={(reload) => setReloadPage(reload)}/>
+                <ProductList products={products} reloadPage={(reload) => setReloadPage(reload)} />
             </Container>
         </>
     );
